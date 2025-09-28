@@ -14,6 +14,7 @@ https://booth.pm/ja/items/2127684
 ## Currently implemented
 - Walking, running, turning, jumping: NUMovmenet
 - Sliding down steep slopes: NUMovement
+- Trampoline: Custom script based on NUMovement
 - Walking up steep slopes when correct material assigned: NUMovementPlatformSyncModForVRChat
 - Platform with sync: NUMovementPlatformSyncModForVRChat
 - Swimming, diving: Modified SwimSystem by Hirabiki  
