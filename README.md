@@ -14,10 +14,11 @@ https://booth.pm/ja/items/2127684
 ## Currently implemented
 - Walking, running, turning, jumping: NUMovmenet
 - Sliding down steep slopes: NUMovement
+- Swimming, diving: Modified SwimSystem by Hirabiki for NUMovement
 - Teleport: NUMovement
 - Launch pad: NUMovement
 - Teleport throwing: Custom script based on NUMovement
 - Trampoline: Custom script based on NUMovement
 - Walking up steep slopes when correct material assigned: NUMovementPlatformSyncModForVRChat
 - Platform with sync: NUMovementPlatformSyncModForVRChat
-- Swimming, diving: Modified SwimSystem by Hirabiki  
+- Stations: NUMovementPlatformSyncModForVRChat
