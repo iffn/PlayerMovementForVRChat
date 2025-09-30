@@ -27,11 +27,10 @@ public class DesktopClimbing : UdonSharpBehaviour
     VRCPlayerApi localPlayer;
     float armLength;
     float currentGrabDistance;
-    float currentPlayerOffset;
 
     Vector3 teleportLocation;
 
-    DesktopClimbingStates currentState;
+    DesktopClimbingStates currentState = DesktopClimbingStates.initialSelection;
 
     DesktopClimbingStates CurrentState
     {
@@ -72,7 +71,14 @@ public class DesktopClimbing : UdonSharpBehaviour
     {
         localPlayer = Networking.LocalPlayer;
 
-        RecalculateArmLenght();
+        if (localPlayer.IsUserInVR())
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        RecalculateArmLength();
+        currentGrabDistance = armLength;
     }
 
     private void Update()
@@ -184,7 +190,7 @@ public class DesktopClimbing : UdonSharpBehaviour
         base.OnAvatarEyeHeightChanged(player, prevEyeHeightAsMeters);
     }
 
-    void RecalculateArmLenght()
+    void RecalculateArmLength()
     {
         Vector3 chest = localPlayer.GetBonePosition(HumanBodyBones.Chest);
         Vector3 shoulder = localPlayer.GetBonePosition(HumanBodyBones.LeftShoulder);
@@ -196,5 +202,7 @@ public class DesktopClimbing : UdonSharpBehaviour
             + (shoulder - upperArm).magnitude
             + (upperArm - lowerArm).magnitude
             + (lowerArm - hand).magnitude;
+
+        currentGrabDistance = Mathf.Clamp(currentGrabDistance, armLength * 0.1f, armLength);
     }
 }
