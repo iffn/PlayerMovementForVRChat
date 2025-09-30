@@ -4,10 +4,22 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
+public enum DesktopClimbingStates
+{
+    idle,
+    initialSelection,
+    movingPlayer,
+    movingConnector
+}
+
 public class DesktopClimbing : UdonSharpBehaviour
 {
     [SerializeField] Transform currentGrabIndicator;
     [SerializeField] Transform nextGrabIndicator;
+
+    [SerializeField] MeshRenderer nextGrabRenderer;
+    [SerializeField] Material validGrabMaterial;
+    [SerializeField] Material invalidGrabMaterial;
 
     [SerializeField] float rayDistance = 0.1f;
     [SerializeField] float normalOffsetAngleDegThreshold = 10f;
@@ -17,13 +29,43 @@ public class DesktopClimbing : UdonSharpBehaviour
     float currentGrabDistance;
     float currentPlayerOffset;
 
-    DesktopClimingStates currentState;
-    enum DesktopClimingStates
+    Vector3 teleportLocation;
+
+    DesktopClimbingStates currentState;
+
+    DesktopClimbingStates CurrentState
     {
-        idle,
-        initialSelection,
-        movingPlayer,
-        movingConnector
+        get
+        {
+            return currentState;
+        }
+        set
+        {
+            switch (value)
+            {
+                case DesktopClimbingStates.idle:
+                    currentGrabIndicator.gameObject.SetActive(false);
+                    nextGrabIndicator.gameObject.SetActive(false);
+                    break;
+                case DesktopClimbingStates.initialSelection:
+                    currentGrabIndicator.gameObject.SetActive(false);
+                    nextGrabIndicator.gameObject.SetActive(true);
+                    break;
+                case DesktopClimbingStates.movingPlayer:
+                    currentGrabIndicator.gameObject.SetActive(true);
+                    nextGrabIndicator.gameObject.SetActive(false);
+                    teleportLocation = localPlayer.GetPosition();
+                    break;
+                case DesktopClimbingStates.movingConnector:
+                    currentGrabIndicator.gameObject.SetActive(true);
+                    nextGrabIndicator.gameObject.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+
+            currentState = value;
+        }
     }
 
     void Start()
@@ -35,18 +77,24 @@ public class DesktopClimbing : UdonSharpBehaviour
 
     private void Update()
     {
-        switch (currentState)
+        switch (CurrentState)
         {
-            case DesktopClimingStates.idle:
+            case DesktopClimbingStates.idle:
                 // No need to do anything
                 break;
-            case DesktopClimingStates.initialSelection:
+            case DesktopClimbingStates.initialSelection:
                 PositionIndicator();
+                CheckGrabConnection();
                 break;
-            case DesktopClimingStates.movingPlayer:
-                break;
-            case DesktopClimingStates.movingConnector:
+            case DesktopClimbingStates.movingPlayer:
                 PositionIndicator();
+                MovePlayer();
+                TeleportPlayer();
+                break;
+            case DesktopClimbingStates.movingConnector:
+                CheckGrabConnection();
+                PositionIndicator();
+                TeleportPlayer();
                 break;
             default:
                 break;
@@ -56,7 +104,7 @@ public class DesktopClimbing : UdonSharpBehaviour
     void PositionIndicator()
     {
         currentGrabDistance += Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
-        currentGrabDistance = Mathf.Clamp(currentPlayerOffset, armLength * 0.1f, armLength);
+        currentGrabDistance = Mathf.Clamp(currentGrabDistance, armLength * 0.1f, armLength);
 
         nextGrabIndicator.position = HeadOffsetPosition(currentGrabDistance);
     }
@@ -65,6 +113,45 @@ public class DesktopClimbing : UdonSharpBehaviour
     {
         bool validGrabConnection = CheckValidGrabPoint(nextGrabIndicator.position);
 
+        nextGrabRenderer.sharedMaterial = validGrabConnection ? validGrabMaterial : invalidGrabMaterial;
+
+        if (validGrabConnection)
+        {
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                CurrentState = DesktopClimbingStates.movingPlayer;
+
+                currentGrabIndicator.position = nextGrabIndicator.position;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            CurrentState = DesktopClimbingStates.movingPlayer;
+        }
+    }
+
+    void TeleportPlayer()
+    {
+        localPlayer.TeleportTo(teleportLocation, localPlayer.GetRotation());
+    }
+
+    void MovePlayer()
+    {
+        // Moving player
+        Vector3 interactPosition = HeadOffsetPosition(currentGrabDistance);
+
+        teleportLocation += (nextGrabIndicator.position - currentGrabIndicator.position);
+
+        // Handle mouse buttons
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            CurrentState = DesktopClimbingStates.movingConnector;
+        }
+        else if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            CurrentState = DesktopClimbingStates.initialSelection;
+        }
     }
 
     Vector3 HeadOffsetPosition(float offset)
