@@ -147,7 +147,7 @@ public class DesktopClimbing : UdonSharpBehaviour
         // Moving player
         Vector3 interactPosition = HeadOffsetPosition(currentGrabDistance);
 
-        teleportLocation += (nextGrabIndicator.position - currentGrabIndicator.position);
+        teleportLocation += (currentGrabIndicator.position - interactPosition);
 
         // Handle mouse buttons
         if (Input.GetKeyDown(KeyCode.Mouse0))
