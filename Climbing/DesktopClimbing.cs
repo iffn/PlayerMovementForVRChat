@@ -95,11 +95,28 @@ public class DesktopClimbing : UdonSharpBehaviour
             case DesktopClimbingStates.movingPlayer:
                 PositionIndicator();
                 MovePlayer();
-                TeleportPlayer();
                 break;
             case DesktopClimbingStates.movingConnector:
                 CheckGrabConnection();
                 PositionIndicator();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        switch (CurrentState)
+        {
+            case DesktopClimbingStates.idle:
+                break;
+            case DesktopClimbingStates.initialSelection:
+                break;
+            case DesktopClimbingStates.movingPlayer:
+                TeleportPlayer();
+                break;
+            case DesktopClimbingStates.movingConnector:
                 TeleportPlayer();
                 break;
             default:
@@ -163,6 +180,12 @@ public class DesktopClimbing : UdonSharpBehaviour
     Vector3 HeadOffsetPosition(float offset)
     {
         VRCPlayerApi.TrackingData head = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
+
+        return localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation * (offset * Vector3.forward)
+            + localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
+        
+        return localPlayer.GetBoneRotation(HumanBodyBones.Head) * (offset * Vector3.forward)
+            + localPlayer.GetBonePosition(HumanBodyBones.Head);
 
         return head.rotation * (offset * Vector3.forward) + head.position;
     }
