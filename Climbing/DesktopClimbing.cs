@@ -2,8 +2,8 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 using VRC.Udon.Common;
+using VRC.Udon;
 
 public enum DesktopClimbingStates
 {
@@ -13,56 +13,15 @@ public enum DesktopClimbingStates
     movingConnector
 }
 
-public class DesktopClimbing : UdonSharpBehaviour
+public class DesktopClimbing : GeneralClimbing
 {
     [SerializeField] Transform currentGrabIndicator;
     [SerializeField] Transform nextGrabIndicator;
 
     [SerializeField] MeshRenderer nextGrabRenderer;
-    [SerializeField] Material validGrabMaterial;
-    [SerializeField] Material invalidGrabMaterial;
-
-    [SerializeField] float rayDistance = 0.1f;
-    [SerializeField] float normalOffsetAngleDegThreshold = 10f;
-
-    [SerializeField] VRCStation linkedStation;
-
-    Transform stationMover;
-
-    VRCPlayerApi localPlayer;
+    
     float armLength;
     float currentGrabDistance;
-
-    Vector3 teleportLocation;
-
-    bool isUsingStation = false;
-
-    public bool IsUsingStation
-    {
-        get
-        {
-            return isUsingStation;
-        }
-        private set
-        {
-            if (value == isUsingStation)
-                return;
-
-            if (value)
-            {
-                stationMover.SetPositionAndRotation(localPlayer.GetPosition(), localPlayer.GetRotation());
-                linkedStation.UseStation(localPlayer);
-            }
-            else
-            {
-                linkedStation.ExitStation(localPlayer);
-            }
-
-            isUsingStation = value;
-        }
-    }
-
-
 
     DesktopClimbingStates currentState = DesktopClimbingStates.initialSelection;
 
@@ -105,14 +64,9 @@ public class DesktopClimbing : UdonSharpBehaviour
         }
     }
 
-    void UseStation()
-    {
-        isUsingStation = true;
-    }
-
     void Start()
     {
-        localPlayer = Networking.LocalPlayer;
+        Setup();
 
         if (localPlayer.IsUserInVR())
         {
@@ -122,8 +76,6 @@ public class DesktopClimbing : UdonSharpBehaviour
 
         RecalculateArmLength();
         currentGrabDistance = armLength;
-
-        stationMover = linkedStation.transform;
     }
 
     private void Update()
@@ -140,12 +92,10 @@ public class DesktopClimbing : UdonSharpBehaviour
             case DesktopClimbingStates.movingPlayer:
                 PositionIndicator();
                 MovePlayer();
-                RotateStation();
                 break;
             case DesktopClimbingStates.movingConnector:
                 CheckGrabConnection();
                 PositionIndicator();
-                RotateStation();
                 break;
             default:
                 break;
@@ -182,11 +132,6 @@ public class DesktopClimbing : UdonSharpBehaviour
         }
     }
 
-    void RotateStation()
-    {
-        
-    }
-
     void MovePlayer()
     {
         // Moving player
@@ -218,27 +163,18 @@ public class DesktopClimbing : UdonSharpBehaviour
         return head.rotation * (offset * Vector3.forward) + head.position;
     }
 
-    bool CheckValidGrabPoint(Vector3 worldPosition)
-    {
-        Ray ray = new Ray(worldPosition, Vector3.down);
-
-        if (Physics.Raycast(ray, out var hitInfo, rayDistance))
-        {
-            if (Vector3.Angle(hitInfo.normal, Vector3.up) <= normalOffsetAngleDegThreshold)
-                return true;
-        }
-
-        return false;
-    }
-
     public override void OnAvatarChanged(VRCPlayerApi player)
     {
         base.OnAvatarChanged(player);
+
+        RecalculateArmLength();
     }
 
     public override void OnAvatarEyeHeightChanged(VRCPlayerApi player, float prevEyeHeightAsMeters)
     {
         base.OnAvatarEyeHeightChanged(player, prevEyeHeightAsMeters);
+
+        RecalculateArmLength();
     }
 
     void RecalculateArmLength()
