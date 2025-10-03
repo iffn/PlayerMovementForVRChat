@@ -134,9 +134,7 @@ public class DesktopClimbing : GeneralClimbing
     void MovePlayer()
     {
         // Moving player
-        Vector3 interactPosition = HeadOffsetPosition(currentGrabDistance);
-
-        stationMover.position += (currentGrabIndicator.position - interactPosition);
+        PositionPlayer(HeadOffsetPosition(currentGrabDistance), currentGrabIndicator.position);
 
         // Handle mouse buttons
         if (Input.GetKeyDown(KeyCode.Mouse0))
