@@ -48,7 +48,6 @@ public class DesktopClimbing : GeneralClimbing
                 case DesktopClimbingStates.movingPlayer:
                     currentGrabIndicator.gameObject.SetActive(true);
                     nextGrabIndicator.gameObject.SetActive(false);
-                    teleportLocation = localPlayer.GetPosition();
                     IsUsingStation = true;
                     break;
                 case DesktopClimbingStates.movingConnector:

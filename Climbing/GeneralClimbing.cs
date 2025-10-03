@@ -9,6 +9,7 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
 {
     [SerializeField] protected Material validGrabMaterial;
     [SerializeField] protected Material invalidGrabMaterial;
+    [SerializeField] protected Material idleMaterial;
 
     [SerializeField] protected float rayDistance = 0.1f;
     [SerializeField] protected float normalOffsetAngleDegThreshold = 10f;
@@ -17,7 +18,7 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
 
     protected VRCPlayerApi localPlayer;
     protected Transform stationMover;
-    protected bool isUsingStation = false;
+    bool isUsingStation = false;
 
     public bool IsUsingStation
     {
