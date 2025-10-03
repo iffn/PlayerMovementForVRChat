@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -16,9 +17,23 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
 
     [SerializeField] protected VRCStation linkedStation;
 
+    [SerializeField] protected TextMeshPro debugOutput;
+
     protected VRCPlayerApi localPlayer;
     protected Transform stationMover;
     bool isUsingStation = false;
+
+    public virtual string DebugString
+    {
+        get
+        {
+            string returnString = "";
+
+            returnString += $"{nameof(IsUsingStation)}: {IsUsingStation}\n";
+
+            return returnString;
+        }
+    }
 
     public bool IsUsingStation
     {
@@ -30,6 +45,8 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
         {
             if (value == isUsingStation)
                 return;
+
+            linkedStation.gameObject.SetActive(value);
 
             if (value)
             {
@@ -49,6 +66,7 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
     {
         localPlayer = Networking.LocalPlayer;
         stationMover = linkedStation.transform;
+        linkedStation.gameObject.SetActive(false);
     }
 
     protected void PositionPlayer(Vector3 handPosition, Vector3 targetPosition)

@@ -21,7 +21,7 @@ public class VRClimbing : GeneralClimbing
     [SerializeField] MeshRenderer leftHandRenderer;
     [SerializeField] MeshRenderer rightHandRenderer;
 
-    VRClimbingStates currentState;
+    VRClimbingStates currentState = VRClimbingStates.initialSelection;
     bool prevLeftHandUse = false;
     bool prevRightHandUse = false;
 
@@ -30,6 +30,24 @@ public class VRClimbing : GeneralClimbing
 
     bool validLeftGrab;
     bool validRightGrab;
+
+    public override string DebugString
+    {
+        get
+        {
+            string returnString = "";
+
+            returnString += base.DebugString;
+
+            returnString += $"{nameof(currentState)}: {currentState}\n";
+            returnString += $"{nameof(leftHandPosiiton)}: {leftHandPosiiton}\n";
+            returnString += $"{nameof(rightHandPosiiton)}: {rightHandPosiiton}\n";
+            returnString += $"{nameof(validLeftGrab)}: {validLeftGrab}\n";
+            returnString += $"{nameof(validRightGrab)}: {validRightGrab}\n";
+
+            return returnString;
+        }
+    }
 
     void Start()
     {
@@ -49,8 +67,8 @@ public class VRClimbing : GeneralClimbing
             case VRClimbingStates.idle:
                 break;
             case VRClimbingStates.initialSelection:
-                leftGrabIndicator.position = leftHandPosiiton;
-                rightGrabIndicator.position = leftHandPosiiton;
+                HandleIndicator(leftHandPosiiton, leftGrabIndicator, leftHandRenderer, ref validLeftGrab);
+                HandleIndicator(rightHandPosiiton, rightGrabIndicator, rightHandRenderer, ref validRightGrab);
                 break;
             case VRClimbingStates.leftGrip:
                 PositionPlayer(leftHandPosiiton, leftGrabIndicator.position);
@@ -63,13 +81,18 @@ public class VRClimbing : GeneralClimbing
             default:
                 break;
         }
+
+        if(debugOutput != null)
+        {
+            debugOutput.text = DebugString;
+        }
     }
 
     void HandleIndicator(Vector3 handPosition, Transform indicator, MeshRenderer linkedRenderer, ref bool validGrab)
     {
         validGrab = CheckValidGrabPoint(handPosition);
         indicator.position = handPosition;
-        leftHandRenderer.sharedMaterial = validGrab ? validGrabMaterial : invalidGrabMaterial;
+        linkedRenderer.sharedMaterial = validGrab ? validGrabMaterial : invalidGrabMaterial;
     }
 
     public override void InputUse(bool value, UdonInputEventArgs args)
