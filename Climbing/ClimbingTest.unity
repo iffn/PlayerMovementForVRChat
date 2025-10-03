@@ -5552,7 +5552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMobility: 1
-  canUseStationFromStation: 1
+  canUseStationFromStation: 0
   animatorController: {fileID: 0}
   disableStationExit: 1
   seated: 0
