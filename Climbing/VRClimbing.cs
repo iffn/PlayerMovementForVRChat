@@ -25,8 +25,10 @@ public class VRClimbing : GeneralClimbing
     bool prevLeftHandUse = false;
     bool prevRightHandUse = false;
 
-    Vector3 leftHandPosiiton => localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.LeftHand).position;
-    Vector3 rightHandPosiiton => localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position;
+    Vector3 LeftHandPosition => localPlayer.GetBonePosition(HumanBodyBones.LeftHand);
+    //localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.LeftHand).position;
+    Vector3 RightHandPosition => localPlayer.GetBonePosition(HumanBodyBones.RightHand);
+    //localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position;
 
     bool validLeftGrab;
     bool validRightGrab;
@@ -40,8 +42,10 @@ public class VRClimbing : GeneralClimbing
             returnString += base.DebugString;
 
             returnString += $"{nameof(currentState)}: {currentState}\n";
-            returnString += $"{nameof(leftHandPosiiton)}: {leftHandPosiiton}\n";
-            returnString += $"{nameof(rightHandPosiiton)}: {rightHandPosiiton}\n";
+            returnString += $"{nameof(LeftHandPosition)}: {LeftHandPosition}\n";
+            returnString += $"{nameof(RightHandPosition)}: {RightHandPosition}\n";
+            returnString += $"{nameof(leftGrabIndicator.position)}: {leftGrabIndicator.position}\n";
+            returnString += $"{nameof(rightGrabIndicator.position)}: {rightGrabIndicator.position}\n";
             returnString += $"{nameof(validLeftGrab)}: {validLeftGrab}\n";
             returnString += $"{nameof(validRightGrab)}: {validRightGrab}\n";
 
@@ -67,16 +71,17 @@ public class VRClimbing : GeneralClimbing
             case VRClimbingStates.idle:
                 break;
             case VRClimbingStates.initialSelection:
-                HandleIndicator(leftHandPosiiton, leftGrabIndicator, leftHandRenderer, ref validLeftGrab);
-                HandleIndicator(rightHandPosiiton, rightGrabIndicator, rightHandRenderer, ref validRightGrab);
+                HandleIndicator(LeftHandPosition, leftGrabIndicator, leftHandRenderer, ref validLeftGrab);
+                HandleIndicator(RightHandPosition, rightGrabIndicator, rightHandRenderer, ref validRightGrab);
                 break;
             case VRClimbingStates.leftGrip:
-                PositionPlayer(leftHandPosiiton, leftGrabIndicator.position);
-                HandleIndicator(rightHandPosiiton, rightGrabIndicator, rightHandRenderer, ref validRightGrab);
+                //PositionPlayer(localPlayer.GetPosition(), Vector3.zero);
+                PositionPlayer(LeftHandPosition, leftGrabIndicator.position);
+                HandleIndicator(RightHandPosition, rightGrabIndicator, rightHandRenderer, ref validRightGrab);
                 break;
             case VRClimbingStates.rightGrip:
-                PositionPlayer(rightHandPosiiton, rightGrabIndicator.position);
-                HandleIndicator(leftHandPosiiton, leftGrabIndicator, leftHandRenderer, ref validLeftGrab);
+                PositionPlayer(RightHandPosition, rightGrabIndicator.position);
+                HandleIndicator(LeftHandPosition, leftGrabIndicator, leftHandRenderer, ref validLeftGrab);
                 break;
             default:
                 break;

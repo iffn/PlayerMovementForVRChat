@@ -30,6 +30,7 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
             string returnString = "";
 
             returnString += $"{nameof(IsUsingStation)}: {IsUsingStation}\n";
+            returnString += $"{nameof(stationMover)}.position: {stationMover.position}\n";
 
             return returnString;
         }
