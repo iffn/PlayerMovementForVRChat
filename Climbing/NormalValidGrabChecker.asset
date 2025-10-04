@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: NormalValidGrabChecker
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 9347b4819977a3e4b8e0f6ce8ea1f54e,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 71ba763e75ffac6409b25161a1f731c9,
     type: 2}
   udonAssembly: 
   assemblyError: 

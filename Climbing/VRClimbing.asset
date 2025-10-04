@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: VRClimbing
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: f64129b9e0cf5ae43a58b2ca1e6acf38,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 79974b37e441a8042a96769d6d954e18,
     type: 2}
   udonAssembly: 
   assemblyError: 
