@@ -18,6 +18,8 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
 
     [SerializeField] protected TextMeshPro debugOutput;
 
+    [SerializeField] ClimbingActivationInformer[] climbingActivationInformers;
+
     protected VRCPlayerApi localPlayer;
     protected Transform stationMover;
     bool isUsingStation = false;
@@ -59,6 +61,14 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
             }
 
             isUsingStation = value;
+            
+            foreach(ClimbingActivationInformer informer in climbingActivationInformers)
+            {
+                if (value)
+                    informer.ClimbingStart();
+                else
+                    informer.ClimbingStop();
+            }
         }
     }
 
