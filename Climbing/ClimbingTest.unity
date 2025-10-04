@@ -5414,6 +5414,7 @@ MonoBehaviour:
   validGrabChecker: {fileID: 122642666}
   linkedStation: {fileID: 1479818635}
   debugOutput: {fileID: 1740062351}
+  climbingActivationInformers: []
   leftGrabIndicator: {fileID: 1561376187}
   rightGrabIndicator: {fileID: 1465066109}
   leftHandRenderer: {fileID: 1634212935}
@@ -6279,6 +6280,7 @@ MonoBehaviour:
   validGrabChecker: {fileID: 122642666}
   linkedStation: {fileID: 1479818635}
   debugOutput: {fileID: 0}
+  climbingActivationInformers: []
   currentGrabIndicator: {fileID: 677196989}
   nextGrabIndicator: {fileID: 1702786552}
   nextGrabRenderer: {fileID: 887453833}
