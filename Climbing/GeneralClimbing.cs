@@ -12,8 +12,7 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
     [SerializeField] protected Material invalidGrabMaterial;
     [SerializeField] protected Material idleMaterial;
 
-    [SerializeField] protected float rayDistance = 0.1f;
-    [SerializeField] protected float normalOffsetAngleDegThreshold = 10f;
+    [SerializeField] ValidGrabChecker validGrabChecker;
 
     [SerializeField] protected VRCStation linkedStation;
 
@@ -77,14 +76,6 @@ public abstract class GeneralClimbing : UdonSharpBehaviour
 
     protected bool CheckValidGrabPoint(Vector3 worldPosition)
     {
-        Ray ray = new Ray(worldPosition, Vector3.down);
-
-        if (Physics.Raycast(ray, out var hitInfo, rayDistance))
-        {
-            if (Vector3.Angle(hitInfo.normal, Vector3.up) <= normalOffsetAngleDegThreshold)
-                return true;
-        }
-
-        return false;
+        return validGrabChecker.CheckValidGrabPoint(worldPosition);
     }
 }
