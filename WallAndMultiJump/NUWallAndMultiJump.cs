@@ -6,15 +6,27 @@ using VRC.SDKBase;
 using VRC.Udon;
 using VRC.Udon.Common;
 
-public class PMWallJump : UdonSharpBehaviour
+public class NUWallAndMultiJump : UdonSharpBehaviour
 {
     [SerializeField] NUMovement linkedNUMovement;
 
     [SerializeField] float detectDistance = 0.4f;
     [SerializeField] float rayRadius = 0.2f;
 
-    [SerializeField] float verticalJumpMultiplier = 1f;
-    [SerializeField] float noramlJumpMultiplier = 1f;
+    [SerializeField] float verticalJumpMultiplier = 1.5f;
+    [SerializeField] float noramlJumpMultiplier = 2f;
+
+    [SerializeField] int airJumps = 2;
+
+    int currentAirJumpsRemaining;
+
+    private void Update()
+    {
+        if (linkedNUMovement._IsPlayerGrounded())
+        {
+            currentAirJumpsRemaining = airJumps;
+        }
+    }
 
     public override void InputJump(bool value, UdonInputEventArgs args)
     {
@@ -25,14 +37,27 @@ public class PMWallJump : UdonSharpBehaviour
 
         if (value)
         {
-            TryWallJump();
+            if (!TryWallJump())
+                MultiJump();
         }
     }
 
-    void TryWallJump()
+    void MultiJump()
     {
-        Vector3 currentVelocity = linkedNUMovement._GetVelocity();
+        if (currentAirJumpsRemaining <= 0)
+            return;
 
+        Vector3 currentVelocity = linkedNUMovement._GetVelocity();
+        
+        currentVelocity.y = linkedNUMovement._GetJumpImpulse();
+
+        linkedNUMovement._SetVelocity(currentVelocity);
+
+        currentAirJumpsRemaining--;
+    }
+
+    bool TryWallJump()
+    {
         Vector3 lookDirection = linkedNUMovement._GetRotation() * Vector3.forward;
 
         Vector3 currentPosition = linkedNUMovement._GetPosition();
@@ -50,10 +75,13 @@ public class PMWallJump : UdonSharpBehaviour
             outputVelocity.y = linkedNUMovement._GetJumpImpulse() * verticalJumpMultiplier;
 
             linkedNUMovement._SetVelocity(outputVelocity);
+
+            return true;
         }
         else
         {
             Debug.LogWarning("Unable to wall jump");
+            return false;
         }
     }
 }

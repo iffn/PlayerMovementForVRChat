@@ -11258,7 +11258,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wall jumping
+  m_text: 'Wall jumping
+
+    and multi jumping'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19099,6 +19101,7 @@ Transform:
   - {fileID: 2096374087}
   - {fileID: 738802476}
   - {fileID: 1533866080}
+  - {fileID: 1924389437}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1799108862
@@ -19742,7 +19745,7 @@ GameObject:
   - component: {fileID: 1924389436}
   - component: {fileID: 1924389435}
   m_Layer: 0
-  m_Name: WallJump
+  m_Name: WallAndMultiJump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19801,6 +19804,7 @@ MonoBehaviour:
   rayRadius: 0.2
   verticalJumpMultiplier: 1.5
   noramlJumpMultiplier: 2
+  airJumps: 2
 --- !u!4 &1924389437
 Transform:
   m_ObjectHideFlags: 0
@@ -19809,12 +19813,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924389434}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.257492, y: 5.713601, z: 8.782803}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -42, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1787420452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1931941658
 GameObject:
@@ -21594,7 +21598,6 @@ SceneRoots:
   - {fileID: 93358473}
   - {fileID: 1604808112}
   - {fileID: 182637284}
-  - {fileID: 1924389437}
   - {fileID: 1787420452}
   - {fileID: 1936395322}
   - {fileID: 563102764}
