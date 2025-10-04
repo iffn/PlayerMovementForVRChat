@@ -6282,6 +6282,7 @@ MonoBehaviour:
   currentGrabIndicator: {fileID: 677196989}
   nextGrabIndicator: {fileID: 1702786552}
   nextGrabRenderer: {fileID: 887453833}
+  scrollSpeed: 0.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

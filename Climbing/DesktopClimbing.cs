@@ -19,9 +19,12 @@ public class DesktopClimbing : GeneralClimbing
     [SerializeField] Transform nextGrabIndicator;
 
     [SerializeField] MeshRenderer nextGrabRenderer;
-    
+
+    [SerializeField] float scrollSpeed = 0.2f;
+
     float armLength;
     float currentGrabDistance;
+
 
     DesktopClimbingStates currentState = DesktopClimbingStates.initialSelection;
 
@@ -103,7 +106,7 @@ public class DesktopClimbing : GeneralClimbing
 
     void PositionIndicator()
     {
-        currentGrabDistance += Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
+        currentGrabDistance += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed; // Does not need to be multiplied with Time.deltaTime
         currentGrabDistance = Mathf.Clamp(currentGrabDistance, armLength * 0.1f, armLength);
 
         nextGrabIndicator.position = HeadOffsetPosition(currentGrabDistance);
