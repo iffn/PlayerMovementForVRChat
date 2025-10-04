@@ -6275,7 +6275,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 2124655818}
   validGrabMaterial: {fileID: 2100000, guid: bc15d331355872246971c8633738b11b, type: 2}
   invalidGrabMaterial: {fileID: 2100000, guid: 81d908f10c08afb418a17eec9203d799, type: 2}
-  idleMaterial: {fileID: 2100000, guid: 81d908f10c08afb418a17eec9203d799, type: 2}
+  idleMaterial: {fileID: 2100000, guid: 4a412f04b35cee545a6381a97d92f280, type: 2}
   validGrabChecker: {fileID: 122642666}
   linkedStation: {fileID: 1479818635}
   debugOutput: {fileID: 0}
