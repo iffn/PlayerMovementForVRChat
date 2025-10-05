@@ -7492,7 +7492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 172080431}
   m_Layer: 0
-  m_Name: Teleport Target Parcour Return
+  m_Name: Teleport Target Parkour Return
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7978,7 +7978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 283184880}
   m_Layer: 0
-  m_Name: Teleport Target Parcour Start
+  m_Name: Teleport Target Parkour Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12312,7 +12312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 921208493}
   m_Layer: 0
-  m_Name: Teleport Target Parcour Exit
+  m_Name: Teleport Target Parkour Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12815,7 +12815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 971455010}
   m_Layer: 0
-  m_Name: Parcour
+  m_Name: Parkour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15669,7 +15669,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1724e52a46a23df48884733139279203,
         type: 3}
       propertyPath: m_Name
-      value: TestWorldParcour
+      value: TestWorldParkour
       objectReference: {fileID: 0}
     - target: {fileID: 2982408803557973007, guid: 1724e52a46a23df48884733139279203,
         type: 3}
