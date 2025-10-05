@@ -6,7 +6,7 @@ Combine various forms of movement in VRChat
 https://github.com/iffn/NUMovementPlatformSyncModForVRChat
 - NUMovement by Nestorboy  
 https://github.com/Nestorboy/NUMovement
-- CyanPlayerObjectPool by CyanPlayerObjectPool  
+- CyanPlayerObjectPool by CyanLaser  
 https://github.com/CyanLaser/CyanPlayerObjectPool
 - SwimSystem 2.0 by Hirabiki  
 https://booth.pm/ja/items/2127684
