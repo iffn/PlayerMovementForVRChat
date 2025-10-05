@@ -97,6 +97,8 @@ public class DesktopClimbing : GeneralClimbing
                 break;
             case DesktopClimbingStates.movingConnector:
                 CheckGrabConnection();
+                if (Input.GetKeyDown(KeyCode.Mouse1))
+                    CurrentState = DesktopClimbingStates.movingPlayer;
                 PositionIndicator();
                 break;
             default:
@@ -126,11 +128,6 @@ public class DesktopClimbing : GeneralClimbing
 
                 currentGrabIndicator.position = nextGrabIndicator.position;
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            CurrentState = DesktopClimbingStates.movingPlayer;
         }
     }
 
