@@ -25,10 +25,10 @@ public class VRClimbing : GeneralClimbing
     bool prevLeftHandUse = false;
     bool prevRightHandUse = false;
 
-    Vector3 LeftHandPosition => localPlayer.GetBonePosition(HumanBodyBones.LeftHand);
-    //localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.LeftHand).position;
-    Vector3 RightHandPosition => localPlayer.GetBonePosition(HumanBodyBones.RightHand);
-    //localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position;
+    Vector3 LeftHandPosition => //localPlayer.GetBonePosition(HumanBodyBones.LeftHand);
+        localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.LeftHand).position;
+    Vector3 RightHandPosition => //localPlayer.GetBonePosition(HumanBodyBones.RightHand);
+        localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.RightHand).position;
 
     bool validLeftGrab;
     bool validRightGrab;
@@ -64,7 +64,7 @@ public class VRClimbing : GeneralClimbing
         }
     }
 
-    void Update()
+    public override void PostLateUpdate()
     {
         switch (currentState)
         {

@@ -790,8 +790,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1049925415096402967}
-  rayDistance: 0.1
-  normalOffsetAngleDegThreshold: 10
+  rayDistance: 0.2
+  normalOffsetAngleDegThreshold: 20
 --- !u!114 &1049925415096402967
 MonoBehaviour:
   m_ObjectHideFlags: 0

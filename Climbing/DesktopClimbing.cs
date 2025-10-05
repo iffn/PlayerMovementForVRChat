@@ -80,7 +80,7 @@ public class DesktopClimbing : GeneralClimbing
         currentGrabDistance = armLength;
     }
 
-    private void Update()
+    public override void PostLateUpdate()
     {
         switch (CurrentState)
         {
@@ -151,13 +151,14 @@ public class DesktopClimbing : GeneralClimbing
     {
         VRCPlayerApi.TrackingData head = localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head);
 
+        return head.rotation * (offset * Vector3.forward) + head.position;
+
         return localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).rotation * (offset * Vector3.forward)
             + localPlayer.GetTrackingData(VRCPlayerApi.TrackingDataType.Head).position;
         
         return localPlayer.GetBoneRotation(HumanBodyBones.Head) * (offset * Vector3.forward)
             + localPlayer.GetBonePosition(HumanBodyBones.Head);
 
-        return head.rotation * (offset * Vector3.forward) + head.position;
     }
 
     public override void OnAvatarChanged(VRCPlayerApi player)
