@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextPlacement: {fileID: 0}
-  interactText: Use
+  interactText: Sit
   interactTextGO: {fileID: 0}
   proximity: 2
   SynchronizePosition: 0
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextPlacement: {fileID: 0}
-  interactText: Use
+  interactText: Exit Parkour
   interactTextGO: {fileID: 0}
   proximity: 2
   SynchronizePosition: 0
@@ -13259,7 +13259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextPlacement: {fileID: 0}
-  interactText: Use
+  interactText: Exit Parkour
   interactTextGO: {fileID: 0}
   proximity: 2
   SynchronizePosition: 0
@@ -14709,7 +14709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextPlacement: {fileID: 0}
-  interactText: Use
+  interactText: Sit
   interactTextGO: {fileID: 0}
   proximity: 2
   SynchronizePosition: 0
@@ -15154,7 +15154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextPlacement: {fileID: 0}
-  interactText: Use
+  interactText: Teleport to the other side
   interactTextGO: {fileID: 0}
   proximity: 2
   SynchronizePosition: 0
@@ -16732,7 +16732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextPlacement: {fileID: 0}
-  interactText: Use
+  interactText: Parkour Start
   interactTextGO: {fileID: 0}
   proximity: 2
   SynchronizePosition: 0
@@ -24887,7 +24887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextPlacement: {fileID: 0}
-  interactText: Use
+  interactText: Teleport to the other side
   interactTextGO: {fileID: 0}
   proximity: 2
   SynchronizePosition: 0
