@@ -20237,12 +20237,12 @@ PrefabInstance:
         type: 3}
       propertyPath: movingTransforms.Array.data[1]
       value: 
-      objectReference: {fileID: 556738366}
+      objectReference: {fileID: 587342349}
     - target: {fileID: 6109341705986569877, guid: 80e32a6c83035d24aa503f7c375ead27,
         type: 3}
       propertyPath: movingTransforms.Array.data[2]
       value: 
-      objectReference: {fileID: 587342349}
+      objectReference: {fileID: 556738366}
     - target: {fileID: 6119169854263854419, guid: 80e32a6c83035d24aa503f7c375ead27,
         type: 3}
       propertyPath: LinkedNUMovementSyncMod
