@@ -1,5 +1,8 @@
 # Player movement for VRChat
-Combine various forms of movement in VRChat
+Combine various forms of movement in VRChat  
+Video: https://www.youtube.com/watch?v=3kpFXVHB1sI  
+Test it here: https://vrchat.com/home/world/wrld_b9ab04fd-f8b2-45c5-847f-2a7acfca3a1f
+
 
 ## Requirements
 - NUMovementPlatformSyncModForVRChat  
