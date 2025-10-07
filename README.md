@@ -1,7 +1,7 @@
 # Player movement for VRChat
 Combine various forms of movement in VRChat  
 Video: https://www.youtube.com/watch?v=3kpFXVHB1sI  
-Test it here: https://vrchat.com/home/world/wrld_b9ab04fd-f8b2-45c5-847f-2a7acfca3a1f
+Test it here: https://vrchat.com/home/world/wrld_b9ab04fd-f8b2-45c5-847f-2a7acfca3a1f  
 Warning: VRChat has limited ways of implementing things that often work in obscure ways. Therefore, test things first and be prepared to potentially spend months working on weird workarounds that might work until the next update.
 
 ## Requirements
