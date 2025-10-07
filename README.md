@@ -1,5 +1,6 @@
 # Player movement for VRChat
 Combine various forms of movement in VRChat
+Warning: VRChat has limited ways of implementing things that often work in obscure ways. Therefore, test things first and be prepared to potentially spend months working on weird workarounds that might work until the next update.
 
 ## Requirements
 - NUMovementPlatformSyncModForVRChat  
